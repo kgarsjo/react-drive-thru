@@ -67,7 +67,7 @@ describe('reducers/order_items', () => {
     });
 
     describe('when reducing changeOrderItemStateToFulfilled', () => {
-        it('should modify state for open order item', function () {
+        it('should modify state for open order item', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -85,7 +85,7 @@ describe('reducers/order_items', () => {
             });
         });
 
-        it('should have no effect for fulfilled order item', function () {
+        it('should have no effect for fulfilled order item', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -99,7 +99,7 @@ describe('reducers/order_items', () => {
     });
 
     describe('when reducing changeOrderItemStateToOpen', () => {
-        it('should modify state for fulfilled order item', function () {
+        it('should modify state for fulfilled order item', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -117,7 +117,7 @@ describe('reducers/order_items', () => {
             });
         });
 
-        it('should have no effect for fulfilled order item', function () {
+        it('should have no effect for fulfilled order item', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -131,7 +131,7 @@ describe('reducers/order_items', () => {
     });
 
     describe('when reducing removeOrderItem', () => {
-        it('should remove order matching id', function () {
+        it('should remove order matching id', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -143,7 +143,7 @@ describe('reducers/order_items', () => {
             expect(orderItemsReducer(state, action)).toEqual({});
         });
 
-        it('should persist other orders with differing ids', function () {
+        it('should persist other orders with differing ids', () => {
             var state = {
                 1111: {
                     id: 1111,
@@ -166,7 +166,7 @@ describe('reducers/order_items', () => {
             });
         });
 
-        it('should have no effect if no order_item matches the id', function () {
+        it('should have no effect if no order_item matches the id', () => {
             var state = {
                 1111: {
                     id: 1111,
