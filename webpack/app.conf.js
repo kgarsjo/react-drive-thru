@@ -15,18 +15,25 @@ module.exports = {
     entry: './src/app.js',
     externals: nodeModules,
     module: {
-        rules: [{
-            test: /.jsx?$/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['es2015', { modules: false }],
-                        'react',
-                    ],
-                },
-            }],
-        }],
+        rules: [
+            {
+                test: /jsx?$/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            'es2015',
+                            'react',
+                        ],
+                    },
+                }],
+            },
+            {
+                test: /jsx?$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
     },
     output: {
         library: 'React Drive-Thru Server',

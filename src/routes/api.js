@@ -8,4 +8,4 @@ export default function attachApiRoutes(parent) {
 
     parent.use('/api', apiRouter);
     return parent;
-};
+}
