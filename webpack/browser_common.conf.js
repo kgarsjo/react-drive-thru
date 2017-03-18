@@ -3,18 +3,24 @@ module.exports = {
         library: './src/browser_app',
     },
     module: {
-        rules: [{
-            exclude: /node_modules/,
-            test: /jsx?$/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['es2015', { modules: false }],
-                        'react',
-                    ],
-                },
-            }],
-        }],
+        rules: [
+            {
+                test: /jsx?$/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            'es2015',
+                            'react',
+                        ],
+                    },
+                }],
+            },
+            {
+                test: /jsx?$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
     },
 };
