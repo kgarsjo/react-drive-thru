@@ -16,4 +16,4 @@ export default function attachPageRoutes(parent) {
     parent.use('/', pageRouter);
     parent.use(express.static('public'));
     return parent;
-};
+}

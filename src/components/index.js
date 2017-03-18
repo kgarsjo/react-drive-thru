@@ -9,7 +9,7 @@ export default function Index(props) {
         <html>
             <body>
                 <div id="main"></div>
-                <script src={"/js/app" + getBrowserAppExtension(props.production)}></script>
+                <script src={'/js/app' + getBrowserAppExtension(props.production)}></script>
             </body>
         </html>
     );
