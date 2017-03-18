@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
+var commonRules = require('./rules_common.config');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -15,25 +16,7 @@ module.exports = {
     entry: './src/app.js',
     externals: nodeModules,
     module: {
-        rules: [
-            {
-                test: /jsx?$/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            'es2015',
-                            'react',
-                        ],
-                    },
-                }],
-            },
-            {
-                test: /jsx?$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader'
-            },
-        ],
+        rules: commonRules,
     },
     output: {
         library: 'React Drive-Thru Server',
