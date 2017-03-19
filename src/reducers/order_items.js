@@ -16,7 +16,10 @@ function addOrderItem(state, action) {
 
 function changeOrderItemState(state, action) {
     var newState = Object.assign({}, state);
-    newState[action.id].state = action.state;
+    var orderItem = newState[action.id];
+    if (orderItem) {
+        orderItem.state = action.state;
+    }
     return newState;
 }
 
