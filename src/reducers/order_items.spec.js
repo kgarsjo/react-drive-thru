@@ -76,6 +76,18 @@ describe('reducers/order_items', () => {
     });
 
     describe('when reducing changeOrderItemStateToFulfilled', () => {
+        it('should have no effect for nonexistent id', () => {
+            var state = {
+                1111: {
+                    id: 1111,
+                    menu_item_id: 2222,
+                    state: ORDER_ITEM_STATE_OPEN,
+                },
+            };
+            var action = changeOrderItemStateToFulfilled(3333);
+            expect(orderItemsReducer(state, action)).toEqual(state);
+        });
+
         it('should modify state for open order item', () => {
             var state = {
                 1111: {

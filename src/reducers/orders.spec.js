@@ -141,13 +141,7 @@ describe('reducers/orders', function () {
                 },
             };
             var action = changeOrderStateToOpen(4444);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
-                },
-            });
+            expect(ordersReducer(state, action)).toEqual(state);
         });
 
         it('should change order state to open with appropriate action', function () {
@@ -233,13 +227,7 @@ describe('reducers/orders', function () {
                 },
             };
             var action = removeAllOrderItems(4444);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
-                },
-            });
+            expect(ordersReducer(state, action)).toEqual(state);
         });
 
         it('should remove all order_items with an existing id', function () {
@@ -271,13 +259,7 @@ describe('reducers/orders', function () {
                 },
             };
             var action = removeAllOrderItems(4444);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
-                },
-            });
+            expect(ordersReducer(state, action)).toEqual(state);
         });
 
         it('should remove an order with an existing id', function () {
