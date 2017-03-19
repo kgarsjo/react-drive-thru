@@ -1,7 +1,10 @@
 module.exports = [
     {
         test: /jsx?$/,
-        exclude: /\.spec\.js$/,
+        exclude: [
+            /node_modules/,
+            /\.spec\.js$/,
+        ],
         use: [{
             loader: 'babel-loader',
             options: {
