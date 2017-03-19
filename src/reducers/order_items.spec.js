@@ -11,6 +11,15 @@ import {
 
 
 describe('reducers/order_items', () => {
+    it('should return an empty object when reducing an undefined state and unknown action', () => {
+        expect(orderItemsReducer(undefined, undefined)).toEqual({});
+    });
+
+    it('should return the passed state when reducing a passed state and unknown action', () => {
+        var state = { foo: 'bar' };
+        expect(orderItemsReducer(state, undefined)).toEqual(state);
+    });
+
     describe('when reducing addOrderItem', () => {
         it('should add open order item to empty state', () => {
             var state = {};
