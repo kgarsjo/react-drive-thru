@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function EditOrderActions({ orderId, onOrderCancelClick, onOrderSaveClick }) {
     return (
-        <div className='sty_edit_order_actions wd_edit_order_actions'>
+        <div className='sty_edit_order_actions wd_edit_order_actions bordered'>
             <button
                 className='wd_cancel'
                 onClick={() => { onOrderCancelClick(orderId); }}

@@ -42,8 +42,10 @@ export default function EditOrder(props) {
         <div className='sty_edit_order wd_edit_order'>
             { getEditOrderActions(props) }
             <div className='half_width'>
-                { getOrderDetails(props) }
-                { getOrderLineItems(props) }
+                <div className='bordered'>
+                    { getOrderDetails(props) }
+                    { getOrderLineItems(props) }
+                </div>
             </div>
             <div className='half_width'>
                 { getMenuItems(props) }
