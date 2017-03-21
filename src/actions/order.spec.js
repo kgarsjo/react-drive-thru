@@ -6,6 +6,7 @@ import {
     REMOVE_ORDER,
     REMOVE_ORDER_ITEMS,
 
+    ORDER_STATE_NEW,
     ORDER_STATE_OPEN,
     ORDER_STATE_FULFILLED,
     ORDER_STATE_COMPLETED,
@@ -30,17 +31,17 @@ describe('actions/order', function () {
                 type: ADD_ORDER,
                 id: 1111,
                 order_items: [],
-                state: ORDER_STATE_OPEN,
+                state: ORDER_STATE_NEW,
             });
         });
 
-        it('should return an action when passing an single order_item', function () {
+        it('should return an action when passing a single order_item', function () {
             var actual = addOrder(1111, 2222);
             expect(actual).toEqual({
                 type: ADD_ORDER,
                 id: 1111,
                 order_items: [2222],
-                state: ORDER_STATE_OPEN,
+                state: ORDER_STATE_NEW,
             });
         });
 
@@ -50,7 +51,7 @@ describe('actions/order', function () {
                 type: ADD_ORDER,
                 id: 1111,
                 order_items: [2222, 3333],
-                state: ORDER_STATE_OPEN,
+                state: ORDER_STATE_NEW,
             });
         });
     });

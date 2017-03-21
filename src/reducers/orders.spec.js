@@ -1,5 +1,6 @@
 import ordersReducer from './orders';
 import {
+    ORDER_STATE_NEW,
     ORDER_STATE_OPEN,
     ORDER_STATE_FULFILLED,
     ORDER_STATE_COMPLETED,
@@ -34,7 +35,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -44,7 +45,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = addOrder(3333, 4444);
@@ -52,12 +53,12 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
                 3333: {
                     id: 3333,
                     order_items: [4444],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -67,7 +68,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = addOrder(1111, [3333]);
@@ -75,7 +76,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 }
             });
         });
@@ -87,7 +88,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = addOrderItems(3333, 4444);
@@ -99,7 +100,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = addOrderItems(1111, [2222, 3333]);
@@ -107,7 +108,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -117,7 +118,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = addOrderItems(1111, [2222, 4444, 5555]);
@@ -125,7 +126,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333, 4444, 5555],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -137,7 +138,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = changeOrderStateToOpen(4444);
@@ -167,7 +168,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = changeOrderStateToFulfilled(1111);
@@ -185,7 +186,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = changeOrderStateToCompleted(1111);
@@ -203,7 +204,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = changeOrderStateToCancelled(1111);
@@ -223,7 +224,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeAllOrderItems(4444);
@@ -235,7 +236,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeAllOrderItems(1111);
@@ -243,7 +244,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -255,7 +256,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeAllOrderItems(4444);
@@ -267,12 +268,12 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
                 4444: {
                     id: 4444,
                     order_items: [5555, 6666],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeOrder(4444);
@@ -280,7 +281,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -292,7 +293,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeOrderItems(3333, 4444);
@@ -304,7 +305,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeOrderItems(1111, [4444, 5555]);
@@ -312,7 +313,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });
@@ -322,7 +323,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333, 4444],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             };
             var action = removeOrderItems(1111, [2222, 4444, 5555]);
@@ -330,7 +331,7 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [3333],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             });
         });

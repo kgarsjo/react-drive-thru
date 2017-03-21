@@ -6,6 +6,7 @@ export const ADD_ORDER_ITEMS = 'action:order:add_order_items';
 export const REMOVE_ORDER_ITEMS = 'actions:order:remove_order_items';
 export const REMOVE_ALL_ORDER_ITEMS = 'actions:order:remove_all_order_items';
 
+export const ORDER_STATE_NEW = 'state:order:new';
 export const ORDER_STATE_OPEN = 'state:order:open';
 export const ORDER_STATE_FULFILLED = 'state:order:fulfilled';
 export const ORDER_STATE_COMPLETED = 'state:order:completed';
@@ -24,7 +25,7 @@ export function addOrder(id, order_items = []) {
         type: ADD_ORDER,
         id,
         order_items,
-        state: ORDER_STATE_OPEN,
+        state: ORDER_STATE_NEW,
     };
 }
 

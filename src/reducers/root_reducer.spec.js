@@ -7,7 +7,7 @@ import {
 } from '../actions/order_item';
 
 import {
-    ORDER_STATE_OPEN,
+    ORDER_STATE_NEW,
     addOrder,
 } from '../actions/order';
 
@@ -16,6 +16,7 @@ describe('reducers/root_reducer', () => {
         var state = {};
         var action = addMenuItem(1111, 'Burger', 'bgr', 12.34);
         expect(rootReducer(state, action)).toEqual({
+            activity: {},
             menu_items: {
                 1111: {
                     id: 1111,
@@ -36,6 +37,7 @@ describe('reducers/root_reducer', () => {
 
         state = rootReducer(state, menuAction);
         expect(rootReducer(state, orderItemAction)).toEqual({
+            activity: {},
             menu_items: {
                 1111: {
                     id: 1111,
@@ -64,6 +66,7 @@ describe('reducers/root_reducer', () => {
         state = rootReducer(state, menuAction);
         state = rootReducer(state, orderItemAction);
         expect(rootReducer(state, orderAction)).toEqual({
+            activity: {},
             menu_items: {
                 1111: {
                     id: 1111,
@@ -83,7 +86,7 @@ describe('reducers/root_reducer', () => {
                 3333: {
                     id: 3333,
                     order_items: [2222],
-                    state: ORDER_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
                 },
             },
         });
