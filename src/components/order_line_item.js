@@ -15,7 +15,7 @@ export default function OrderLineItem(props) {
             <td className='wd_price'>{ centsToDollars(props.price) }</td>
             <td>
                 <button
-                    className='wd_delete'
+                    className='delete_column_content wd_delete'
                     onClick={ props.onDelete }
                 >X</button>
             </td>

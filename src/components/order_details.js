@@ -3,15 +3,21 @@ import React from 'react';
 
 export default function OrderDetails({ id, price, state, summary}) {
     return (
-        <div className='sty_order_details wd_order_details'>
-            <div className='primary_info'>
-                <div className='wd_id'>{ id }</div>
-                <div className='wd_summary'>{ summary }</div>
-            </div>
-            <div className='secondary_info'>
-                <div className='wd_price'>{ centsToDollars(price) }</div>
-                <div className='wd_state'>{ state }</div>
-            </div>
-        </div>
+        <table className='sty_order_details wd_order_details'>
+            <thead>
+                <tr>
+                    <th>Order #:</th>
+                    <th>State:</th>
+                    <th>Price:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td className='wd_id'>{ id }</td>
+                    <td className='wd_state'>{ state }</td>
+                    <td className='wd_price'>{ centsToDollars(price) }</td>
+                </tr>
+            </tbody>
+        </table>
     );
 }

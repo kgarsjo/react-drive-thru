@@ -7,18 +7,15 @@ describe('components/order_details', function () {
     var id;
     var price;
     var state;
-    var summary;
 
     beforeEach(function () {
         id = 1111;
         price = 3025;
         state = 'Fulfilled';
-        summary = 'Burger (x4)';
         component = shallow(<OrderDetails
             id={id}
             price={price}
             state={state}
-            summary={summary}
         />);
     });
 
@@ -37,9 +34,5 @@ describe('components/order_details', function () {
 
     it('should display the correct state', function () {
         expect(component.find('.wd_state').text()).toEqual('Fulfilled');
-    });
-
-    it('should display the correct summary', function () {
-        expect(component.find('.wd_summary').text()).toEqual('Burger (x4)');
     });
 });
