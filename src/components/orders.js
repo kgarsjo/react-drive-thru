@@ -1,6 +1,14 @@
 import Order from './order';
 import React from 'react';
 
+function getAlert({ alert }) {
+    if (alert) {
+        return <div className='alert'>
+            <h2>{ alert }</h2>
+        </div>;
+    }
+}
+
 function mapToChildren(props) {
     return props.orders.map((order) => {
         return <Order
@@ -16,10 +24,16 @@ function mapToChildren(props) {
 
 export default function Orders(props) {
     return (
-        <table className='sty_orders wd_orders'>
-            <tbody>
-                { mapToChildren(props) }
-            </tbody>
-        </table>
+        <div className='sty_orders wd_orders'>
+            { getAlert(props) }
+            <div className={'orders'}>
+                <table className='orders_table'>
+                    <tbody>
+                        { mapToChildren(props) }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     );
 }
