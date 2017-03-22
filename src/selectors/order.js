@@ -23,6 +23,12 @@ export function getCurrentActivityOrderId(state) {
     return state && state.activity && state.activity.order_id;
 }
 
+export function selectAlertFromOrders(state) {
+    if (Object.keys(state.orders).length > 4) {
+        return 'Alert: More than 4 Open Orders';
+    }
+}
+
 export function selectDenormalizedFilteredOrders(state, filter) {
     return selectFilteredOrders(state, filter)
         .map((order) => {
