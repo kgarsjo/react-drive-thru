@@ -24,8 +24,7 @@ function getOrderDetails({ order }) {
     return <OrderDetails
         id={order.id}
         price={order.price}
-        state={order.state}
-        summary={order.summary}
+        state={order.stateFormatted}
     />;
 }
 
@@ -44,7 +43,9 @@ export default function EditOrder(props) {
             <div className='half_width'>
                 <div className='bordered'>
                     { getOrderDetails(props) }
-                    { getOrderLineItems(props) }
+                    <div className='line_items_container'>
+                        { getOrderLineItems(props) }
+                    </div>
                 </div>
             </div>
             <div className='half_width'>

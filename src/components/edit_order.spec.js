@@ -32,7 +32,7 @@ describe('components/edit_order', function () {
                 }
             ],
             price: 1234,
-            state: 'Fulfilled',
+            stateFormatted: 'Fulfilled',
         };
         component = shallow(<EditOrder
             menuItems={menuItems}
@@ -59,8 +59,7 @@ describe('components/edit_order', function () {
         expect(matching.length).toEqual(1);
         expect(matching.props().id).toEqual(order.id);
         expect(matching.props().price).toEqual(order.price);
-        expect(matching.props().state).toEqual(order.state);
-        expect(matching.props().summary).toEqual(order.summary);
+        expect(matching.props().state).toEqual(order.stateFormatted);
     });
 
     it('should embed the OrderLineItems component', function () {
