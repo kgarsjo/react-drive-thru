@@ -1,7 +1,7 @@
 import {shallow} from 'enzyme';
 import React from 'react';
 import App from './app';
-import Navigation from './navigation';
+import Navigation from '../containers/navigation';
 
 describe('components/app', function () {
     var component;
