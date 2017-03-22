@@ -1,9 +1,14 @@
 import {connect} from 'react-redux';
-import {changeOrderStateToOpen} from '../actions/order';
+import {viewFulfilledOrders} from '../actions/activity';
+import {
+    ORDER_STATE_NEW,
+    changeOrderStateToOpen
+} from '../actions/order';
+import {removeOrderItem} from '../actions/order_item';
 import {
     addMenuItemToOrder,
+    cancelOrderChanges,
     createAndEdiNewtOrder,
-    deleteOrderItemFromOrder,
     deleteOrder,
 } from '../commands/commands';
 import {
@@ -30,16 +35,24 @@ const mapDispatchToProps = (dispatch) => {
         onMenuItemClick: (menuItemId, orderId) => {
             addMenuItemToOrder(dispatch, orderId, menuItemId);
         },
-        onOrderCancelClick: (orderId) => {
-            deleteOrder(dispatch, orderId);
-            createAndEdiNewtOrder(dispatch);
+        onOrderCancelClick: (orderId, orderState) => {
+            if (orderState === ORDER_STATE_NEW) {
+                deleteOrder(dispatch, orderId);
+                createAndEdiNewtOrder(dispatch);
+            } else {
+                cancelOrderChanges(dispatch);
+            }
         },
-        onOrderSaveClick: (orderId) => {
+        onOrderSaveClick: (orderId, orderState) => {
             dispatch(changeOrderStateToOpen(orderId));
-            createAndEdiNewtOrder(dispatch);
+            if (orderState === ORDER_STATE_NEW) {
+                createAndEdiNewtOrder(dispatch);
+            } else {
+                dispatch(viewFulfilledOrders());
+            }
         },
         onOrderItemDelete: (orderItemId, orderId) => {
-            deleteOrderItemFromOrder(dispatch, orderId, orderItemId);
+            dispatch(removeOrderItem(orderItemId));
         },
     };
 };

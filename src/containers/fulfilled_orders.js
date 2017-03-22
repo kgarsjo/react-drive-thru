@@ -4,6 +4,7 @@ import {
     changeOrderStateToCompleted,
 } from '../actions/order';
 import {connect} from 'react-redux';
+import {editOrder} from '../actions/activity';
 import {selectDenormalizedFilteredOrders} from '../selectors/order';
 import Orders from '../components/orders';
 
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onOrderCompleteClick: (orderId) => {
             dispatch(changeOrderStateToCompleted(orderId));
+        },
+        onOrderEditClick: (orderId) => {
+            dispatch(editOrder(orderId));
         },
     };
 };

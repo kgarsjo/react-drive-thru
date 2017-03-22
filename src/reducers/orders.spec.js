@@ -7,14 +7,11 @@ import {
     ORDER_STATE_CANCELLED,
 
     addOrder,
-    addOrderItems,
     changeOrderStateToOpen,
     changeOrderStateToFulfilled,
     changeOrderStateToCompleted,
     changeOrderStateToCancelled,
-    removeAllOrderItems,
     removeOrder,
-    removeOrderItems,
 } from '../actions/order';
 
 describe('reducers/orders', function () {
@@ -30,11 +27,10 @@ describe('reducers/orders', function () {
     describe('when reducing addOrder', function () {
         it('should add open order item to empty state', () => {
             var state = {};
-            var action = addOrder(1111, 2222);
+            var action = addOrder(1111);
             expect(ordersReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
-                    order_items: [2222],
                     state: ORDER_STATE_NEW,
                 },
             });
@@ -44,20 +40,17 @@ describe('reducers/orders', function () {
             var state = {
                 1111: {
                     id: 1111,
-                    order_items: [2222],
                     state: ORDER_STATE_NEW,
                 },
             };
-            var action = addOrder(3333, 4444);
+            var action = addOrder(3333);
             expect(ordersReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
-                    order_items: [2222],
                     state: ORDER_STATE_NEW,
                 },
                 3333: {
                     id: 3333,
-                    order_items: [4444],
                     state: ORDER_STATE_NEW,
                 },
             });
@@ -67,67 +60,15 @@ describe('reducers/orders', function () {
             var state = {
                 1111: {
                     id: 1111,
-                    order_items: [2222],
-                    state: ORDER_STATE_NEW,
+                    state: ORDER_STATE_FULFILLED,
                 },
             };
-            var action = addOrder(1111, [3333]);
+            var action = addOrder(1111);
             expect(ordersReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
-                    order_items: [3333],
                     state: ORDER_STATE_NEW,
                 }
-            });
-        });
-    });
-
-    describe('when reducing addOrderItems', function () {
-        it('should have no effect with a nonexistent order id', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = addOrderItems(3333, 4444);
-            expect(ordersReducer(state, action)).toEqual(state);
-        });
-
-        it('should fill order_items for an order with none', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = addOrderItems(1111, [2222, 3333]);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            });
-        });
-
-        it('should merge order_items_for an order with existing', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = addOrderItems(1111, [2222, 4444, 5555]);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333, 4444, 5555],
-                    state: ORDER_STATE_NEW,
-                },
             });
         });
     });
@@ -218,38 +159,6 @@ describe('reducers/orders', function () {
         });
     });
 
-    describe('when reducing removeAllOrderItems', function () {
-        it('should have no effect with a nonexistent id', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = removeAllOrderItems(4444);
-            expect(ordersReducer(state, action)).toEqual(state);
-        });
-
-        it('should remove all order_items with an existing id', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = removeAllOrderItems(1111);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [],
-                    state: ORDER_STATE_NEW,
-                },
-            });
-        });
-    });
-
     describe('when reducing removeOrder', function () {
         it('should have no effect with a nonexistent id', function () {
             var state = {
@@ -259,7 +168,7 @@ describe('reducers/orders', function () {
                     state: ORDER_STATE_NEW,
                 },
             };
-            var action = removeAllOrderItems(4444);
+            var action = removeOrder(4444);
             expect(ordersReducer(state, action)).toEqual(state);
         });
 
@@ -281,56 +190,6 @@ describe('reducers/orders', function () {
                 1111: {
                     id: 1111,
                     order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            });
-        });
-    });
-
-    describe('when reducing removeOrderItems', function () {
-        it('should have no effect with a nonexistent order id', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = removeOrderItems(3333, 4444);
-            expect(ordersReducer(state, action)).toEqual(state);
-        });
-
-        it('should have no effect with nonmatching order items', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = removeOrderItems(1111, [4444, 5555]);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333],
-                    state: ORDER_STATE_NEW,
-                },
-            });
-        });
-
-        it('should remove matching order items', function () {
-            var state = {
-                1111: {
-                    id: 1111,
-                    order_items: [2222, 3333, 4444],
-                    state: ORDER_STATE_NEW,
-                },
-            };
-            var action = removeOrderItems(1111, [2222, 4444, 5555]);
-            expect(ordersReducer(state, action)).toEqual({
-                1111: {
-                    id: 1111,
-                    order_items: [3333],
                     state: ORDER_STATE_NEW,
                 },
             });

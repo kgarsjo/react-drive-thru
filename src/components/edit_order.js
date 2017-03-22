@@ -8,7 +8,7 @@ function getEditOrderActions({ order, onOrderCancelClick, onOrderSaveClick }) {
     return <EditOrderActions
         onOrderCancelClick={onOrderCancelClick}
         onOrderSaveClick={onOrderSaveClick}
-        orderId={order.id}
+        order={order}
     />;
 }
 

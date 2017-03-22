@@ -2,4 +2,8 @@
     .delete_column_content {
         float: right;
     }
+    
+    &.fulfilled {
+        background-color: beige;
+    }
 }
