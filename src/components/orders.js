@@ -26,12 +26,8 @@ export default function Orders(props) {
     return (
         <div className='sty_orders wd_orders'>
             { getAlert(props) }
-            <div className={'orders'}>
-                <table className='orders_table'>
-                    <tbody>
-                        { mapToChildren(props) }
-                    </tbody>
-                </table>
+            <div className='orders'>
+                    { mapToChildren(props) }
             </div>
 
         </div>

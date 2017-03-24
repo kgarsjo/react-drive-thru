@@ -3,11 +3,14 @@ import OrderLineItem from './order_line_item';
 
 function mapToChildren({ onOrderItemDelete, orderItems, orderId }) {
     return orderItems.map((orderItem) => {
+        const onDelete = (onOrderItemDelete)
+            ? () => { onOrderItemDelete(orderItem.id, orderId); }
+            : undefined;
         return <OrderLineItem
             key={orderItem.id}
             id={orderItem.id}
             name={orderItem.menuItem.name}
-            onDelete={() => { onOrderItemDelete(orderItem.id, orderId); }}
+            onDelete={onDelete}
             price={orderItem.menuItem.price}
             state={orderItem.state}
         />;
