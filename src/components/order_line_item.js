@@ -13,9 +13,10 @@ function getClassname({ id, state}) {
     return classes.join(' ');
 }
 
-function getOrderItemAction(onClick, text) {
+function getOrderItemAction(onClick, text, className) {
     if (onClick) {
         return <button
+            className={className}
             onClick={onClick}
         >{ text}</button>;
     }
@@ -23,7 +24,7 @@ function getOrderItemAction(onClick, text) {
 
 function getOrderItemActions(props) {
     return <div>
-        { getOrderItemAction(props.onDelete, 'Delete') }
+        { getOrderItemAction(props.onDelete, 'Delete', 'wd_delete') }
     </div>;
 }
 
