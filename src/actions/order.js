@@ -52,13 +52,6 @@ export function changeOrderStateToCancelled(id) {
     };
 }
 
-export function removeAllOrderItems(id) {
-    return {
-        type: REMOVE_ALL_ORDER_ITEMS,
-        id,
-    };
-}
-
 export function removeOrder(id) {
     return {
         type: REMOVE_ORDER,
