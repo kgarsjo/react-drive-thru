@@ -9,6 +9,7 @@ function mapToChildren({ onOrderItemDelete, orderItems, orderId }) {
             name={orderItem.menuItem.name}
             onDelete={() => { onOrderItemDelete(orderItem.id, orderId); }}
             price={orderItem.menuItem.price}
+            state={orderItem.state}
         />;
     });
 }

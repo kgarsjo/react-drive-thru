@@ -5,14 +5,18 @@ import EditOrderActions from './edit_order_actions';
 describe('./components/edit_order_actions', function () {
     var onOrderCancelClick = jest.fn();
     var onOrderSaveClick = jest.fn();
-    var orderId;
+    var order;
     var component;
 
     beforeEach(function () {
+        order = {
+            id: 1111,
+            state: 'foo',
+        };
         component = shallow(<EditOrderActions
             onOrderCancelClick={onOrderCancelClick}
             onOrderSaveClick={onOrderSaveClick}
-            orderId={orderId}
+            order={order}
         />);
     });
 
@@ -24,14 +28,14 @@ describe('./components/edit_order_actions', function () {
     describe('when clicking cancel', function () {
         it('should call the onClick fn', function () {
             component.find('.wd_cancel').simulate('click');
-            expect(onOrderCancelClick).toBeCalledWith(orderId);
+            expect(onOrderCancelClick).toBeCalledWith(order.id, order.state);
         });
     });
 
     describe('when clicking save', function () {
         it('should call the onClick fn', function () {
             component.find('.wd_save').simulate('click');
-            expect(onOrderSaveClick).toBeCalledWith(orderId);
+            expect(onOrderSaveClick).toBeCalledWith(order.id, order.state);
         });
     });
 });

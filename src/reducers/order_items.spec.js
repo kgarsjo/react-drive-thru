@@ -4,8 +4,8 @@ import {
     ORDER_ITEM_STATE_OPEN,
 
     addOrderItem,
-    changeOrderItemStateToFulfilled,
-    changeOrderItemStateToOpen,
+    changeOrderItemStateToFulfilledByOrderId,
+    changeOrderItemStateToOpenByOrderId,
     removeOrderItem,
 } from '../actions/order_item';
 
@@ -23,11 +23,12 @@ describe('reducers/order_items', () => {
     describe('when reducing addOrderItem', () => {
         it('should add open order item to empty state', () => {
             var state = {};
-            var action = addOrderItem(1111, 2222);
+            var action = addOrderItem(1111, 2222, 3333);
             expect(orderItemsReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             });
@@ -38,19 +39,22 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
-            var action = addOrderItem(3333, 4444);
+            var action = addOrderItem(4444, 5555, 6666);
             expect(orderItemsReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
-                3333: {
-                    id: 3333,
-                    menu_item_id: 4444,
+                4444: {
+                    id: 4444,
+                    menu_item_id: 5555,
+                    order_id: 6666,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             });
@@ -61,30 +65,33 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
-            var action = addOrderItem(1111, 3333);
+            var action = addOrderItem(1111, 4444, 5555);
             expect(orderItemsReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
-                    menu_item_id: 3333,
+                    menu_item_id: 4444,
+                    order_id: 5555,
                     state: ORDER_ITEM_STATE_OPEN,
                 }
             });
         });
     });
 
-    describe('when reducing changeOrderItemStateToFulfilled', () => {
-        it('should have no effect for nonexistent id', () => {
+    describe('when reducing changeOrderItemStateToFulfilledByOrderId', () => {
+        it('should have no effect for nonexistent matches', () => {
             var state = {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
-            var action = changeOrderItemStateToFulfilled(3333);
+            var action = changeOrderItemStateToFulfilledByOrderId(9999);
             expect(orderItemsReducer(state, action)).toEqual(state);
         });
 
@@ -93,14 +100,16 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
-            var action = changeOrderItemStateToFulfilled(1111);
+            var action = changeOrderItemStateToFulfilledByOrderId(3333);
             expect(orderItemsReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_FULFILLED,
                 },
             });
@@ -111,10 +120,11 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_FULFILLED,
                 },
             };
-            var action = changeOrderItemStateToFulfilled(1111);
+            var action = changeOrderItemStateToFulfilledByOrderId(3333);
             expect(orderItemsReducer(state, action)).toEqual(state);
         });
     });
@@ -125,28 +135,31 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_FULFILLED,
                 },
             };
-            var action = changeOrderItemStateToOpen(1111);
+            var action = changeOrderItemStateToOpenByOrderId(3333);
             expect(orderItemsReducer(state, action)).toEqual({
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             });
         });
 
-        it('should have no effect for fulfilled order item', () => {
+        it('should have no effect for open order item', () => {
             var state = {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
-            var action = changeOrderItemStateToOpen(1111);
+            var action = changeOrderItemStateToOpenByOrderId(3333);
             expect(orderItemsReducer(state, action)).toEqual(state);
         });
     });
@@ -157,6 +170,7 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
@@ -169,11 +183,13 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
                 3333: {
                     id: 3333,
                     menu_item_id: 4444,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
@@ -182,6 +198,7 @@ describe('reducers/order_items', () => {
                 3333: {
                     id: 3333,
                     menu_item_id: 4444,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             });
@@ -192,6 +209,7 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             };
@@ -200,6 +218,7 @@ describe('reducers/order_items', () => {
                 1111: {
                     id: 1111,
                     menu_item_id: 2222,
+                    order_id: 3333,
                     state: ORDER_ITEM_STATE_OPEN,
                 },
             });

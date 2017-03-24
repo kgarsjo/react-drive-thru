@@ -25,46 +25,17 @@ describe('reducers/root_reducer', () => {
                     price: 12.34,
                 },
             },
+            orders: {},
             order_items: {},
-            orders: {},
-        });
-    });
-
-    it('should return updated total state when adding an order_item', function () {
-        var state = {};
-        var menuAction = addMenuItem(1111, 'Burger', 'bgr', 12.34);
-        var orderItemAction = addOrderItem(2222, 1111);
-
-        state = rootReducer(state, menuAction);
-        expect(rootReducer(state, orderItemAction)).toEqual({
-            activity: {},
-            menu_items: {
-                1111: {
-                    id: 1111,
-                    name: 'Burger',
-                    shorthand: 'bgr',
-                    price: 12.34,
-                },
-            },
-            order_items: {
-                2222: {
-                    id: 2222,
-                    menu_item_id: 1111,
-                    state: ORDER_ITEM_STATE_OPEN,
-                },
-            },
-            orders: {},
         });
     });
 
     it('should return updated total state when adding an order', function () {
         var state = {};
         var menuAction = addMenuItem(1111, 'Burger', 'bgr', 12.34);
-        var orderItemAction = addOrderItem(2222, 1111);
-        var orderAction = addOrder(3333, 2222);
+        var orderAction = addOrder(2222);
 
         state = rootReducer(state, menuAction);
-        state = rootReducer(state, orderItemAction);
         expect(rootReducer(state, orderAction)).toEqual({
             activity: {},
             menu_items: {
@@ -75,18 +46,46 @@ describe('reducers/root_reducer', () => {
                     price: 12.34,
                 },
             },
-            order_items: {
+            orders: {
                 2222: {
                     id: 2222,
-                    menu_item_id: 1111,
-                    state: ORDER_ITEM_STATE_OPEN,
+                    state: ORDER_STATE_NEW,
+                },
+            },
+            order_items: {},
+        });
+    });
+
+    it('should return updated total state when adding an order_item', function () {
+        var state = {};
+        var menuAction = addMenuItem(1111, 'Burger', 'bgr', 12.34);
+        var orderAction = addOrder(2222);
+        var orderItemAction = addOrderItem(3333, 1111, 2222);
+
+        state = rootReducer(state, menuAction);
+        state = rootReducer(state, orderAction);
+        expect(rootReducer(state, orderItemAction)).toEqual({
+            activity: {},
+            menu_items: {
+                1111: {
+                    id: 1111,
+                    name: 'Burger',
+                    shorthand: 'bgr',
+                    price: 12.34,
                 },
             },
             orders: {
+                2222: {
+                    id: 2222,
+                    state: ORDER_STATE_NEW,
+                },
+            },
+            order_items: {
                 3333: {
                     id: 3333,
-                    order_items: [2222],
-                    state: ORDER_STATE_NEW,
+                    menu_item_id: 1111,
+                    order_id: 2222,
+                    state: ORDER_ITEM_STATE_OPEN,
                 },
             },
         });

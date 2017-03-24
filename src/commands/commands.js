@@ -1,21 +1,25 @@
 import {
     addOrder,
-    addOrderItems,
-    removeAllOrderItems,
+    changeOrderStateToFulfilled,
     removeOrder,
-    removeOrderItems,
 } from '../actions/order';
-import {editOrder} from '../actions/activity';
+import {
+    changeOrderItemStateToFulfilledByOrderId,
+} from '../actions/order_item';
+import {
+    editOrder,
+    viewFulfilledOrders,
+} from '../actions/activity';
 import {getId} from '../utils/id';
 import {
     addOrderItem,
     removeOrderItem,
+    removeOpenOrderItemsByOrder,
 } from '../actions/order_item';
 
 export function addMenuItemToOrder(dispatch, orderId, menuItemId) {
     const newOrderItemId = getId();
-    dispatch(addOrderItem(newOrderItemId, menuItemId));
-    dispatch(addOrderItems(orderId, newOrderItemId));
+    dispatch(addOrderItem(newOrderItemId, menuItemId, orderId));
 }
 
 export function createAndEdiNewtOrder(dispatch) {
@@ -24,16 +28,17 @@ export function createAndEdiNewtOrder(dispatch) {
     dispatch(editOrder(newOrderId));
 }
 
-export function deleteOrderItemFromOrder(dispatch, orderId, orderItemId) {
-    dispatch(removeOrderItems(orderId, orderItemId));
-    dispatch(removeOrderItem(orderItemId));
-}
-
 export function deleteOrder(dispatch, orderId) {
-    dispatch(removeAllOrderItems(orderId));
+    dispatch(removeOpenOrderItemsByOrder(orderId));
     dispatch(removeOrder(orderId));
 }
 
-export function fulfillOrder(dispatch, orderId, orderItemIds) {
+export function cancelOrderChanges(dispatch, orderId) {
+    dispatch(removeOpenOrderItemsByOrder(orderId));
+    dispatch(viewFulfilledOrders());
+}
 
+export function fulfillOrder(dispatch, orderId) {
+    dispatch(changeOrderStateToFulfilled(orderId));
+    dispatch(changeOrderItemStateToFulfilledByOrderId(orderId));
 }

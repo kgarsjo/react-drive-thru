@@ -3,6 +3,7 @@ import {
     changeOrderStateToFulfilled,
 } from '../actions/order';
 import {connect} from 'react-redux';
+import {fulfillOrder} from '../commands/commands';
 import {
     selectDenormalizedFilteredOrders,
     selectAlertFromOrders,
@@ -21,7 +22,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onOrderFulfillClick: (orderId) => {
-            dispatch(changeOrderStateToFulfilled(orderId));
+            fulfillOrder(dispatch, orderId);
         },
     };
 };

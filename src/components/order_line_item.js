@@ -1,16 +1,21 @@
 import {centsToDollars} from './utils/formatting';
+import {ORDER_ITEM_STATE_FULFILLED} from '../actions/order_item';
 import React from 'react';
 
-function getClassname(id) {
-    return [
+function getClassname({ id, state}) {
+    var classes = [
         'sty_order_line_item',
         'wd_order_line_item_' + id,
-    ].join(' ');
+    ];
+    if (state === ORDER_ITEM_STATE_FULFILLED) {
+        classes.push('fulfilled');
+    }
+    return classes.join(' ');
 }
 
 export default function OrderLineItem(props) {
     return (
-        <tr className={ getClassname(props.id) }>
+        <tr className={ getClassname(props) }>
             <td className='wd_name'>{ props.name }</td>
             <td className='wd_price'>{ centsToDollars(props.price) }</td>
             <td>

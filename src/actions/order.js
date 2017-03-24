@@ -12,29 +12,11 @@ export const ORDER_STATE_FULFILLED = 'state:order:fulfilled';
 export const ORDER_STATE_COMPLETED = 'state:order:completed';
 export const ORDER_STATE_CANCELLED = 'state:order:cancelled';
 
-function wrapInArray(value) {
-    if (Array.isArray(value)) {
-        return value;
-    }
-    return [value];
-}
-
-export function addOrder(id, order_items = []) {
-    order_items = wrapInArray(order_items);
+export function addOrder(id) {
     return {
         type: ADD_ORDER,
         id,
-        order_items,
         state: ORDER_STATE_NEW,
-    };
-}
-
-export function addOrderItems(id, order_items = []) {
-    order_items = wrapInArray(order_items);
-    return {
-        type: ADD_ORDER_ITEMS,
-        id,
-        order_items,
     };
 }
 
@@ -81,14 +63,5 @@ export function removeOrder(id) {
     return {
         type: REMOVE_ORDER,
         id,
-    };
-}
-
-export function removeOrderItems(id, order_items = []) {
-    order_items = wrapInArray(order_items);
-    return {
-        type: REMOVE_ORDER_ITEMS,
-        id,
-        order_items,
     };
 }

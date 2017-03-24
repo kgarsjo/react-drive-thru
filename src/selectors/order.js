@@ -1,4 +1,4 @@
-import {selectDenormalizedOrderItems} from './order_item';
+import {selectDenormalizedOrderItemsByOrder} from './order_item';
 import {
     ORDER_STATE_NEW,
     ORDER_STATE_OPEN,
@@ -47,7 +47,7 @@ export function selectDenormalizedOrder(state, orderId) {
     }
     return (order === undefined) ? undefined : {
         id: order.id,
-        orderItems: selectDenormalizedOrderItems(state, order.order_items),
+        orderItems: selectDenormalizedOrderItemsByOrder(state, order.id),
         price: selectOrderTotalPrice(state, orderId),
         state: order.state,
         stateFormatted: selectOrderFormattedState(state, orderId),
@@ -55,12 +55,12 @@ export function selectDenormalizedOrder(state, orderId) {
 }
 
 export function selectFilteredOrders(state, filter) {
-    return Object.values(state.orders)
+    return Object.keys(state.orders)
+        .map((orderId) => { return state.orders[orderId]; })
         .filter(filter)
         .map((order) => {
             return order;
         });
-
 }
 
 export function selectOrder(state, orderId) {
@@ -88,7 +88,7 @@ export function selectOrderTotalPrice(state, orderId) {
     const order = selectOrder(state, orderId);
     return (order === undefined)
         ? undefined
-        : selectDenormalizedOrderItems(state, order.order_items)
+        : selectDenormalizedOrderItemsByOrder(state, order.id)
             .reduce((prior, orderItem) => {
                 return prior + orderItem.menuItem.price;
             }, 0);

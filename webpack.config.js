@@ -6,6 +6,5 @@ var stylesConfig = require('./webpack/styles.conf');
 module.exports = [
     appConfig,
     browserConfig,
-    browserMinConfig,
     stylesConfig,
 ];

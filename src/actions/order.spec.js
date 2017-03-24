@@ -13,74 +13,21 @@ import {
     ORDER_STATE_CANCELLED,
 
     addOrder,
-    addOrderItems,
     changeOrderStateToOpen,
     changeOrderStateToFulfilled,
     changeOrderStateToCompleted,
     changeOrderStateToCancelled,
-    removeAllOrderItems,
     removeOrder,
-    removeOrderItems,
 } from './order';
 
 describe('actions/order', function () {
     describe('when calling addOrder', function () {
-        it('should return an action when not passing order_items', function () {
+        it('should return an action', function () {
             var actual = addOrder(1111);
             expect(actual).toEqual({
                 type: ADD_ORDER,
                 id: 1111,
-                order_items: [],
                 state: ORDER_STATE_NEW,
-            });
-        });
-
-        it('should return an action when passing a single order_item', function () {
-            var actual = addOrder(1111, 2222);
-            expect(actual).toEqual({
-                type: ADD_ORDER,
-                id: 1111,
-                order_items: [2222],
-                state: ORDER_STATE_NEW,
-            });
-        });
-
-        it('should return an action when passing an array of order_items', function () {
-            var actual = addOrder(1111, [2222, 3333]);
-            expect(actual).toEqual({
-                type: ADD_ORDER,
-                id: 1111,
-                order_items: [2222, 3333],
-                state: ORDER_STATE_NEW,
-            });
-        });
-    });
-
-    describe('when calling addOrderItems', function () {
-        it('should return an action when not passing order_items', function () {
-            var actual = addOrderItems(1111);
-            expect(actual).toEqual({
-                type: ADD_ORDER_ITEMS,
-                id: 1111,
-                order_items: [],
-            });
-        });
-
-        it('should return an action when passing an single order_item', function () {
-            var actual = addOrderItems(1111, 2222);
-            expect(actual).toEqual({
-                type: ADD_ORDER_ITEMS,
-                id: 1111,
-                order_items: [2222],
-            });
-        });
-
-        it('should return an action when passing an array of order_items', function () {
-            var actual = addOrderItems(1111, [2222, 3333]);
-            expect(actual).toEqual({
-                type: ADD_ORDER_ITEMS,
-                id: 1111,
-                order_items: [2222, 3333],
             });
         });
     });
@@ -121,48 +68,11 @@ describe('actions/order', function () {
         });
     });
 
-    it('should return an action when calling removeAllOrderItems', function () {
-        var actual = removeAllOrderItems(1111);
-        expect(actual).toEqual({
-            type: REMOVE_ALL_ORDER_ITEMS,
-            id: 1111,
-        });
-    });
-
     it('should return an action when calling removeOrder', function () {
         var actual = removeOrder(1111);
         expect(actual).toEqual({
             type: REMOVE_ORDER,
             id: 1111,
-        });
-    });
-
-    describe('when calling removeOrderItems', function () {
-        it('should return an action when not passing order_items', function () {
-            var actual = removeOrderItems(1111);
-            expect(actual).toEqual({
-                type: REMOVE_ORDER_ITEMS,
-                id: 1111,
-                order_items: [],
-            });
-        });
-
-        it('should return an action when passing an single order_item', function () {
-            var actual = removeOrderItems(1111, 2222);
-            expect(actual).toEqual({
-                type: REMOVE_ORDER_ITEMS,
-                id: 1111,
-                order_items: [2222],
-            });
-        });
-
-        it('should return an action when passing an array of order_items', function () {
-            var actual = removeOrderItems(1111, [2222, 3333]);
-            expect(actual).toEqual({
-                type: REMOVE_ORDER_ITEMS,
-                id: 1111,
-                order_items: [2222, 3333],
-            });
         });
     });
 });

@@ -1,14 +1,14 @@
 import {
     ADD_ORDER_ITEM,
-    CHANGE_ORDER_ITEM_STATE,
+    CHANGE_ORDER_ITEM_STATE_BY_ORDER_ID,
     REMOVE_ORDER_ITEM,
 
     ORDER_ITEM_STATE_OPEN,
     ORDER_ITEM_STATE_FULFILLED,
 
     addOrderItem,
-    changeOrderItemStateToFulfilled,
-    changeOrderItemStateToOpen,
+    changeOrderItemStateToFulfilledByOrderId,
+    changeOrderItemStateToOpenByOrderId,
     removeOrderItem,
 } from './order_item';
 
@@ -24,19 +24,19 @@ describe('actions/order_item', () => {
     });
 
     it('should return an action to change state when calling changeOrderItemStateToFulfilled', function () {
-        var actual = changeOrderItemStateToFulfilled(1111);
+        var actual = changeOrderItemStateToFulfilledByOrderId(1111);
         expect(actual).toEqual({
-            type: CHANGE_ORDER_ITEM_STATE,
-            id: 1111,
+            type: CHANGE_ORDER_ITEM_STATE_BY_ORDER_ID,
+            order_id: 1111,
             state: ORDER_ITEM_STATE_FULFILLED,
         });
     });
 
     it('should return an action to change state when calling changeOrderItemStateToOpen', function () {
-        var actual = changeOrderItemStateToOpen(1111);
+        var actual = changeOrderItemStateToOpenByOrderId(1111);
         expect(actual).toEqual({
-            type: CHANGE_ORDER_ITEM_STATE,
-            id: 1111,
+            type: CHANGE_ORDER_ITEM_STATE_BY_ORDER_ID,
+            order_id: 1111,
             state: ORDER_ITEM_STATE_OPEN,
         });
     });
