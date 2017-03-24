@@ -24,7 +24,14 @@ export function getCurrentActivityOrderId(state) {
 }
 
 export function selectAlertFromOrders(state) {
-    if (Object.keys(state.orders).length > 4) {
+    const openOrderCount = Object.keys(state.orders)
+        .map((orderId) => {
+            return state.orders[orderId];
+        })
+        .filter((order) => {
+            return order.state === ORDER_STATE_OPEN;
+        }).length;
+    if (openOrderCount > 4) {
         return 'Alert: More than 4 Open Orders';
     }
 }
