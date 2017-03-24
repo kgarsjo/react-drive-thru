@@ -45,7 +45,7 @@ describe('components/menu_items', function () {
         expect(actual).toEqual(expected);
     });
 
-    it('should call onOrderItemDelete when clicking delete on the line item', function () {
+    it('should call onMenuItemClick when clicking the menu item', function () {
         var matching = component.find(MenuItemButton).first();
         matching.simulate('click');
         expect(onMenuItemClick).toBeCalledWith(menuItems[0].id, orderId);

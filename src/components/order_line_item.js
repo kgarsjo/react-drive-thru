@@ -13,16 +13,28 @@ function getClassname({ id, state}) {
     return classes.join(' ');
 }
 
+function getOrderItemAction(onClick, text, className) {
+    if (onClick) {
+        return <button
+            className={className}
+            onClick={onClick}
+        >{ text}</button>;
+    }
+}
+
+function getOrderItemActions(props) {
+    return <div>
+        { getOrderItemAction(props.onDelete, 'Delete', 'wd_delete') }
+    </div>;
+}
+
 export default function OrderLineItem(props) {
     return (
         <tr className={ getClassname(props) }>
             <td className='wd_name'>{ props.name }</td>
             <td className='wd_price'>{ centsToDollars(props.price) }</td>
             <td>
-                <button
-                    className='delete_column_content wd_delete'
-                    onClick={ props.onDelete }
-                >X</button>
+                { getOrderItemActions(props) }
             </td>
         </tr>
     );

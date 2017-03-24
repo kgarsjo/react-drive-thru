@@ -34,12 +34,12 @@ export default class Order extends React.Component {
 
     getOrderLineItems({order}) {
         if (this.state.drawerOpen) {
-            return <tr className='line_items_container'>
+            return <div className='line_items_container'>
                 <OrderLineItems
                     orderId={order.id}
                     orderItems={order.orderItems}
                 />
-            </tr>;
+            </div>;
         }
     }
 
@@ -62,11 +62,14 @@ export default class Order extends React.Component {
 
     render() {
         return (
-            <tr className='sty_order wd_order'>
-                <td>{ this.getDrawerControl() }</td>
-                <td>{ this.getOrderDetails(this.props) }</td>
-                <td>{ this.getOrderActions(this.props) }</td>
-            </tr>
+            <div className='sty_order wd_order'>
+                <div>
+                    <div className='fake_row drawer_control'>{ this.getDrawerControl() }</div>
+                    <div className='fake_row details'>{ this.getOrderDetails(this.props) }</div>
+                    <div className='fake_row actions'>{ this.getOrderActions(this.props) }</div>
+                </div>
+                { this.getOrderLineItems(this.props) }
+            </div>
         );
     }
 }
