@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {createAndEdiNewtOrder} from '../commands/commands';
+import {createAndEditNewOrder} from '../commands/commands';
 import {
     viewFulfilledOrders,
     viewOpenOrders,
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onCreateOrderClick: () => {
-            createAndEdiNewtOrder(dispatch);
+            createAndEditNewOrder(dispatch);
         },
         onViewFulfilledOrdersClick: () => {
             dispatch(viewFulfilledOrders());

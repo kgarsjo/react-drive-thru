@@ -8,7 +8,7 @@ import {removeOrderItem} from '../actions/order_item';
 import {
     addMenuItemToOrder,
     cancelOrderChanges,
-    createAndEdiNewtOrder,
+    createAndEditNewOrder,
     deleteOrder,
 } from '../commands/commands';
 import {
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
         onOrderCancelClick: (orderId, orderState) => {
             if (orderState === ORDER_STATE_NEW) {
                 deleteOrder(dispatch, orderId);
-                createAndEdiNewtOrder(dispatch);
+                createAndEditNewOrder(dispatch);
             } else {
                 cancelOrderChanges(dispatch);
             }
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch) => {
         onOrderSaveClick: (orderId, orderState) => {
             dispatch(changeOrderStateToOpen(orderId));
             if (orderState === ORDER_STATE_NEW) {
-                createAndEdiNewtOrder(dispatch);
+                createAndEditNewOrder(dispatch);
             } else {
                 dispatch(viewFulfilledOrders());
             }
