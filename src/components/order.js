@@ -43,9 +43,10 @@ export default class Order extends React.Component {
         }
     }
 
-    getOrderAction(onClick, text, order) {
+    getOrderAction(onClick, text, className, order) {
         if (onClick) {
             return <button
+                className={className}
                 onClick={() => { onClick(order.id); }}
             >{ text}</button>;
         }
@@ -53,10 +54,10 @@ export default class Order extends React.Component {
 
     getOrderActions(props) {
         return <div>
-            { this.getOrderAction(props.onOrderEditClick, 'Edit', props.order) }
-            { this.getOrderAction(props.onOrderFulfillClick, 'Fulfill', props.order) }
-            { this.getOrderAction(props.onOrdeCancelClick, 'Cancel', props.order) }
-            { this.getOrderAction(props.onOrderCompleteClick, 'Complete', props.order) }
+            { this.getOrderAction(props.onOrderEditClick, 'Edit', 'wd_edit', props.order) }
+            { this.getOrderAction(props.onOrderFulfillClick, 'Fulfill', 'wd_fulfill', props.order) }
+            { this.getOrderAction(props.onOrdeCancelClick, 'Cancel', 'wd_cancel', props.order) }
+            { this.getOrderAction(props.onOrderCompleteClick, 'Complete', 'wd_complete', props.order) }
         </div>;
     }
 
