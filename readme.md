@@ -22,3 +22,4 @@ yarn start
 ```bash
 npm start
 ```
+The application will be running at `localhost:3000`
