@@ -2,6 +2,7 @@ import {
     ADD_ORDER_ITEM,
     CHANGE_ORDER_ITEM_STATE_BY_ORDER_ID,
     REMOVE_ORDER_ITEM,
+    REMOVE_OPEN_ORDER_ITEMS_BY_ORDER,
 
     ORDER_ITEM_STATE_OPEN,
     ORDER_ITEM_STATE_FULFILLED,
@@ -10,6 +11,7 @@ import {
     changeOrderItemStateToFulfilledByOrderId,
     changeOrderItemStateToOpenByOrderId,
     removeOrderItem,
+    removeOpenOrderItemsByOrder,
 } from './order_item';
 
 describe('actions/order_item', () => {
@@ -46,6 +48,15 @@ describe('actions/order_item', () => {
         expect(actual).toEqual({
             type: REMOVE_ORDER_ITEM,
             id: 1111,
+        });
+    });
+
+    it('should return an action to remove when calling removeOpenOrderItemsByOrder', function () {
+        var actual = removeOpenOrderItemsByOrder(1111);
+        expect(actual).toEqual({
+            type: REMOVE_OPEN_ORDER_ITEMS_BY_ORDER,
+            order_id: 1111,
+            state: ORDER_ITEM_STATE_OPEN,
         });
     });
 });

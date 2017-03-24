@@ -4,15 +4,13 @@ import {
     removeOrder,
 } from '../actions/order';
 import {
-    changeOrderItemStateToFulfilledByOrderId,
-} from '../actions/order_item';
-import {
     editOrder,
     viewFulfilledOrders,
 } from '../actions/activity';
 import {getId} from '../utils/id';
 import {
     addOrderItem,
+    changeOrderItemStateToFulfilledByOrderId,
     removeOrderItem,
     removeOpenOrderItemsByOrder,
 } from '../actions/order_item';
@@ -22,7 +20,7 @@ export function addMenuItemToOrder(dispatch, orderId, menuItemId) {
     dispatch(addOrderItem(newOrderItemId, menuItemId, orderId));
 }
 
-export function createAndEdiNewtOrder(dispatch) {
+export function createAndEditNewOrder(dispatch) {
     const newOrderId = getId();
     dispatch(addOrder(newOrderId));
     dispatch(editOrder(newOrderId));

@@ -15,10 +15,6 @@ const orderStatesToFormattedValues = {
     [ORDER_STATE_CANCELLED]: 'Cancelled',
 };
 
-function getOrderSummary(order) {
-    return 'A Summary';
-}
-
 export function getCurrentActivityOrderId(state) {
     return state && state.activity && state.activity.order_id;
 }
@@ -49,9 +45,6 @@ export function selectDenormalizedFilteredOrders(state, filter) {
 
 export function selectDenormalizedOrder(state, orderId) {
     const order = selectOrder(state, orderId);
-    if (!order) {
-        return undefined;
-    }
     return (order === undefined) ? undefined : {
         id: order.id,
         orderItems: selectDenormalizedOrderItemsByOrder(state, order.id),
@@ -72,16 +65,6 @@ export function selectFilteredOrders(state, filter) {
 
 export function selectOrder(state, orderId) {
     return state.orders[orderId];
-}
-
-export function selectOrders(state, orderIds) {
-    return orderIds
-        .map((orderId) => {
-            return selectOrder(orderId);
-        })
-        .filter((order) => {
-            return order !== undefined;
-        });
 }
 
 export function selectOrderFormattedState(state, orderId) {
