@@ -7,11 +7,11 @@ Track this project's progress: https://trello.com/b/7tNZQPyG/react-drive-thru
 
 ## To Build:
 ```bash
-yarn
+yarn && yarn build
 ```
 ... or ...
 ```bash
-npm install
+npm install && npm build
 ```
 
 ## To Run:
