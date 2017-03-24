@@ -10,6 +10,10 @@ button {
     color: #eee;
     padding: 1.5em;
     margin: 0.25em 0.5em;
+
+    &:disabled {
+        background: #bbb;
+    }
 }
 
 .bordered {
